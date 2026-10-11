@@ -2,7 +2,11 @@ import axios from 'axios';
 
 export const TOKEN_KEY = 'fm_token';
 
-const client = axios.create({ baseURL: import.meta.env.VITE_API_URL || '/api' });
+// VITE_API_URL peut être donnée avec ou sans "/api" (ex. https://mon-backend.onrender.com)
+const rawBase = String(import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
+const baseURL = rawBase ? (rawBase.endsWith('/api') ? rawBase : `${rawBase}/api`) : '/api';
+
+const client = axios.create({ baseURL });
 
 // Début de la journée dans le fuseau horaire de l'utilisateur (limite de nouvelles cartes/jour)
 const dayStart = () => {

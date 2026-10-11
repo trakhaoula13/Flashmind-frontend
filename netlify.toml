@@ -1,0 +1,7 @@
+[build]
+  command = "npm install --no-audit --no-fund && npm run build"
+  publish = "dist"
+
+# VITE_API_URL is the public backend URL and must be embedded in the client bundle
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "VITE_API_URL"
